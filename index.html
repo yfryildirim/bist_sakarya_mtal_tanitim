@@ -27,9 +27,12 @@
             }
             
             .presentation-container {
-                height: auto;
-                min-height: 100vh;
+                height: auto !important;
+                min-height: auto !important;
                 padding: 10px 0;
+                display: block !important;
+                align-items: normal !important;
+                justify-content: normal !important;
             }
         }
 
@@ -59,12 +62,19 @@
         @media (max-width: 768px) {
             .slide {
                 width: 98%;
-                height: auto;
-                min-height: 95vh;
+                height: auto !important;
+                min-height: auto !important;
                 padding: 15px;
                 border-radius: 10px;
                 overflow-y: visible;
                 margin-bottom: 20px;
+            }
+            
+            /* Department slide'ları için özel düzenleme */
+            .department-slide {
+                height: auto !important;
+                min-height: auto !important;
+                padding: 10px;
             }
             
             .slide h1 {
@@ -179,8 +189,22 @@
             /* Tech card'ları düzenle */
             .tech-card {
                 padding: 15px;
-                height: auto;
-                min-height: calc(100% - 30px);
+                height: auto !important;
+                min-height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+            
+            /* Department slide'ları için özel düzenleme */
+            .department-slide .tech-card {
+                height: auto !important;
+                min-height: auto !important;
+                padding: 20px 15px;
+            }
+            
+            .department-slide .department-layout {
+                height: auto !important;
+                min-height: auto !important;
             }
             
             .tech-icon {
