@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "/*"
+  to = "/BIST_Sakarya_Web_Sunumu_Guncel.html"
+  status = 200 

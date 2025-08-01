@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Kod Oluşturucu - BİST Sakarya</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #qrcode {
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .download-btn {
+            background: #2196F3;
+        }
+        .download-btn:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 BİST Sakarya QR Kod Oluşturucu</h1>
+        <p>GitHub Pages URL'inizi girin ve QR kod oluşturun:</p>
+        
+        <input type="text" id="urlInput" placeholder="https://kullaniciadi.github.io/bist-sakarya-web-sunumu" value="https://kullaniciadi.github.io/bist-sakarya-web-sunumu">
+        
+        <br>
+        <button onclick="generateQR()">🔄 QR Kod Oluştur</button>
+        <button class="download-btn" onclick="downloadQR()">📥 QR Kodu İndir</button>
+        
+        <div id="qrcode"></div>
+        
+        <p><strong>Kullanım:</strong> Bu QR kodu telefonla tarayarak sunuma erişebilirsiniz!</p>
+    </div>
+
+    <script>
+        function generateQR() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) {
+                alert('Lütfen bir URL girin!');
+                return;
+            }
+            
+            const qrcodeDiv = document.getElementById('qrcode');
+            qrcodeDiv.innerHTML = '';
+            
+            QRCode.toCanvas(qrcodeDiv, url, {
+                width: 300,
+                margin: 2,
+                color: {
+                    dark: '#000000',
+                    light: '#FFFFFF'
+                }
+            }, function (error) {
+                if (error) console.error(error);
+            });
+        }
+        
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            if (!canvas) {
+                alert('Önce QR kod oluşturun!');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = 'bist-sakarya-qr.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Sayfa yüklendiğinde otomatik QR kod oluştur
+        window.onload = function() {
+            generateQR();
+        };
+    </script>
+</body>
+</html> 

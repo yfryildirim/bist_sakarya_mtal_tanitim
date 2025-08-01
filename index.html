@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BİST Sakarya MTAL Sunumu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 95%;
+            max-width: 1200px;
+            height: 95vh;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mobil için responsive düzenlemeler */
+        @media (max-width: 768px) {
+            .slide {
+                width: 98%;
+                height: 98vh;
+                padding: 10px;
+                border-radius: 10px;
+            }
+            
+            .slide h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+            
+            .slide h2 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+            
+            .slide h3 {
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                height: auto;
+            }
+            
+            .department-layout {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                height: auto;
+            }
+            
+            .department-image {
+                height: 200px;
+                object-fit: cover;
+            }
+            
+            .department-content {
+                padding: 10px;
+            }
+            
+            .department-title {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+            
+            .department-description {
+                font-size: 0.95em;
+                padding: 10px;
+                margin: 4px 0;
+            }
+            
+            .department-features {
+                font-size: 0.9em;
+                padding: 10px;
+                margin: 4px 0;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            .contact-item {
+                padding: 15px;
+            }
+            
+            .contact-icon {
+                font-size: 2em;
+            }
+            
+            .contact-message {
+                margin-top: 20px;
+                padding: 15px;
+            }
+            
+            .contact-message p {
+                font-size: 1em;
+            }
+            
+            .info-box, .stats-box {
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+            
+            .info-box p, .stats-box p {
+                font-size: 0.9em;
+                margin-bottom: 8px;
+            }
+            
+            .feature-item {
+                padding: 12px;
+                margin: 8px 0;
+                font-size: 0.9em;
+            }
+            
+            .tech-card {
+                padding: 20px;
+                height: calc(100% - 40px);
+            }
+            
+            .tech-icon {
+                font-size: 3em;
+                margin-bottom: 15px;
+            }
+            
+            .final-message {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+            
+            .contact-info {
+                padding: 15px;
+                margin: 8px 0;
+            }
+            
+            .contact-info p {
+                font-size: 0.9em;
+            }
+            
+            .historical-item, .mesem-info {
+                padding: 12px;
+                margin: 8px 0;
+                font-size: 0.9em;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                min-width: 100px;
+                border-radius: 25px;
+            }
+            
+            .slide-counter {
+                top: 15px;
+                right: 20px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto 15px;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+                margin-bottom: 20px;
+            }
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideFromLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideFromRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+
+
+        .slide h2 {
+            color: #34495e;
+            font-size: 2em;
+            margin-bottom: 15px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .slide h3 {
+            color: #2980b9;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: calc(100% - 20px);
+            align-content: center;
+        }
+
+
+
+        .info-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideFromLeft 1s ease-out 0.7s both;
+        }
+
+        .info-box p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .stats-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #2196f3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideFromRight 1s ease-out 0.9s both;
+        }
+
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .stats-item:last-child {
+            border-bottom: none;
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            height: calc(100% - 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .tech-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .tech-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.9);
+            color: #2c3e50;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            animation: slideFromLeft 1s ease-out calc(0.5s + var(--delay)) both;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            min-width: 120px;
+            touch-action: manipulation;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            background: url('OKUL LOGOSU.jpg') center/contain no-repeat;
+            animation: logoAppear 1.5s ease-out;
+        }
+
+        @keyframes logoAppear {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(90deg); opacity: 0.7; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.3em;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 10px 0;
+            animation: slideFromRight 1s ease-out calc(0.5s + var(--delay)) both;
+        }
+
+        .historical-item {
+            background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+            color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #fff;
+            animation: slideFromLeft 1s ease-out calc(0.5s + var(--delay)) both;
+        }
+
+        .mesem-info {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            animation: slideFromRight 1s ease-out calc(0.7s + var(--delay)) both;
+        }
+
+        .final-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        /* Yeni stil: Bölüm resmi ve içerik düzeni */
+        .department-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: calc(100% - 80px);
+        }
+
+        .department-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideFromRight 1s ease-out 0.5s both;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .department-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .department-title {
+            font-size: 1.8em;
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .department-description {
+            background: rgba(255,255,255,0.95);
+            color: #2c3e50;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 6px 0;
+            font-size: 1.1em;
+            line-height: 1.5;
+            animation: slideFromLeft 1s ease-out calc(0.7s + var(--delay)) both;
+        }
+
+        .department-features {
+            background: rgba(255,255,255,0.9);
+            color: #2c3e50;
+            padding: 12px;
+            margin: 6px 0;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+            font-size: 1em;
+            line-height: 1.3;
+            animation: slideFromLeft 1s ease-out calc(0.9s + var(--delay)) both;
+        }
+
+        /* Metal alanı için özel CSS */
+        .metal-department .department-features {
+            padding: 8px;
+            margin: 4px 0;
+            font-size: 0.9em;
+            line-height: 1.1;
+        }
+
+        .metal-department .department-content {
+            padding: 8px;
+        }
+
+        .metal-department .department-image {
+            object-fit: cover;
+        }
+
+        /* Müdür Yardımcısı sayfası için özel stiller */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideFromLeft 1s ease-out calc(0.5s + var(--delay)) both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        .contact-message {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            border-left: 5px solid #f39c12;
+            animation: slideFromRight 1s ease-out calc(0.5s + var(--delay)) both;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+        </div>
+
+        <!-- Slayt 1: Kapak -->
+        <div class="slide active">
+            <div class="logo-container">
+                <div class="logo"></div>
+                <h1>BİST Sakarya Mesleki ve Teknik Anadolu Lisesi</h1>
+                <div class="subtitle">Alanlar ve Kariyer Fırsatları Sunumu</div>
+                <div class="subtitle">2025</div>
+            </div>
+        </div>
+
+        <!-- Slayt 2: Genel Bilgiler -->
+        <div class="slide">
+            <div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <h1>Genel Bilgiler & Okulumuzdan Sayılarla</h1>
+                <div class="two-column">
+                <div>
+                    <div class="info-box">
+                        <h3>🏫 Genel Bilgiler</h3>
+                        <p><strong>İl / İlçe:</strong> Sakarya / Adapazarı</p>
+                        <p><strong>Adres:</strong> Çukurahmediye Mah. Sakarya Cd. Meydan Sok. No:3</p>
+                        <p><strong>Telefon:</strong> 0264 274 58 10</p>
+                        <p><strong>E-posta:</strong> 194089@meb.gov.tr</p>
+                        <p><strong>Web:</strong> sakaryaeml.meb.k12.tr</p>
+                        <p><strong>Kuruluş Yılı:</strong> 1946</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="stats-box">
+                        <h3>📊 Sayılarla Okulumuz</h3>
+                        <div class="stats-item">
+                            <span>Toplam Çalışan</span>
+                            <strong>161</strong>
+                        </div>
+                        <div class="stats-item">
+                            <span>Yönetici</span>
+                            <strong>8</strong>
+                        </div>
+                        <div class="stats-item">
+                            <span>Öğretmen</span>
+                            <strong>134</strong>
+                        </div>
+                        <div class="stats-item">
+                            <span>Toplam Öğrenci</span>
+                            <strong>1319</strong>
+                        </div>
+                        <div class="stats-item">
+                            <span>Örgün Öğrenci</span>
+                            <strong>1029</strong>
+                        </div>
+                        <div class="stats-item">
+                            <span>MESEM Öğrenci</span>
+                            <strong>273</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Slayt 3: Tarihçe ve Uygulamalı Eğitim -->
+        <div class="slide">
+            <h1>Geçmişten Bugüne & Geleceğe Uygulamalı Eğitim</h1>
+            <div class="two-column">
+                <div>
+                    <h3>📜 Kısa Tarihçe</h3>
+                    <div class="historical-item" style="--delay: 0s">
+                        <strong>1946:</strong> 3 bölümle öğretime başladı
+                    </div>
+                    <div class="historical-item" style="--delay: 0.2s">
+                        Elektrik, Bilgisayar, Telekomünikasyon, Makine alanları açıldı
+                    </div>
+                    <div class="historical-item" style="--delay: 0.4s">
+                        <strong>1999:</strong> Deprem sonrası yeniden yapılandırıldı
+                    </div>
+                    <div class="historical-item" style="--delay: 0.6s">
+                        <strong>2021:</strong> BİST Sakarya MTAL olarak adı değişti
+                    </div>
+                    <div class="historical-item" style="--delay: 0.8s">
+                        <strong>2023-2024:</strong> Bazı bloklar deprem nedeniyle boşaltıldı
+                    </div>
+                </div>
+                <div>
+                    <h3>🎯 Uygulamalı Eğitim</h3>
+                    <div class="mesem-info" style="--delay: 0s">
+                        <strong>ATP:</strong> 11. sınıf sonunda yaz stajı (40 gün)
+                    </div>
+                    <div class="mesem-info" style="--delay: 0.2s">
+                        <strong>AMP:</strong> 12. sınıfta haftada 3 gün işletmelerde
+                    </div>
+                    <div class="mesem-info" style="--delay: 0.4s">
+                        <strong>MESEM:</strong> 9. sınıftan itibaren haftada 4 gün işletmede eğitim
+                    </div>
+                    <div class="mesem-info" style="--delay: 0.6s">
+                        ✅ Sigorta ve işlemler okul tarafından yürütülmektedir
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 4: Makine Teknolojisi -->
+        <div class="slide department-slide">
+            <div class="tech-card" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);">
+                <h1 class="department-title" style="margin-bottom: 30px; text-align: center; width: 100%;">⚙️ Makina ve Tasarım Teknolojisi Alanı</h1>
+                <div class="department-layout">
+                    <img src="makine.jpg" alt="Makine Teknolojisi" class="department-image">
+                    <div class="department-content">
+                        <div class="department-description" style="--delay: 0s">
+                            <strong>🎓 Eğitim:</strong> Teknik resim, CNC, CAD-CAM, talaşlı imalat
+                        </div>
+                        <div class="department-features" style="--delay: 0.2s">
+                            <strong>💼 Kariyer:</strong> CNC operatörü, teknisyen, kalıp ustası
+                        </div>
+                        <div class="department-features" style="--delay: 0.4s">
+                            <strong>🏭 Sektör:</strong> Otomotiv, beyaz eşya, savunma sanayi
+                        </div>
+                        <div class="department-features" style="--delay: 0.6s">
+                            <strong>📋 Alan Hakkında:</strong> Klasik ve bilgisayar kontrollü üretim tezgâhlarında makine imalatı işlemleri, kalıplama teknikleri, sac metal kalıpları, hacim kalıpları ve iş kalıpları imalatı, iki ve üç boyutlu makine ve mekanizmaları çizimleri, makinelerin temel bakım ve onarımı, mermer kesme ve işleme tezgâhlarında imalat işlemleri, endüstriyel döküm ve kalıplama tekniğine uygun üretime yönelik modelleme ve prototiplerini yapma yeterlikleri kazandırılır.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 5: Metal Teknolojisi -->
+        <div class="slide department-slide">
+            <div class="tech-card metal-department" style="background: linear-gradient(135deg, #7f8c8d 0%, #95a5a6 100%);">
+                <h1 class="department-title" style="margin-bottom: 30px; text-align: center; width: 100%;">🔧 Metal Teknolojisi Alanı</h1>
+                <div class="department-layout">
+                    <img src="metal_resim_1.jpg" alt="Metal Teknolojisi" class="department-image">
+                    <div class="department-content">
+                        <div class="department-description" style="--delay: 0s">
+                            <strong>🎓 Eğitim:</strong> Kaynak çeşitleri, montaj, ölçme teknikleri
+                        </div>
+                        <div class="department-features" style="--delay: 0.2s">
+                            <strong>💼 Kariyer:</strong> Kaynakçı, montaj elemanı
+                        </div>
+                        <div class="department-features" style="--delay: 0.4s">
+                            <strong>🏭 Sektör:</strong> Gemi yapımı, altyapı, çelik konstrüksiyon
+                        </div>
+                        <div class="department-features" style="--delay: 0.6s">
+                            <strong>📋 Alan Hakkında:</strong> Metal sanayi, küresel düzeyde hızla değişen pazar ve rekabet koşulları nedeniyle sürekli ve dinamik bir gelişim içindedir. Bu özellikleri nedeniyle metal sanayi, stratejik bir sanayi olarak ülkelerin yakın ilgisini çekmekte ve bu sektör için devletler tarafından özel planlamalar yapılmaktadır. Özellikle hızla küreselleşmekte olan bu sektörde, rekabet büyük yoğunluk kazanmakta ve sanayileşmiş ülkeler bu sektörün korunması ve rekabet gücünün geliştirilmesi için özel politikalar uygulamaktadırlar. Ülkelerin gelişimi, mesleklerinde bilgi ve teknolojiyi yakalamış insan gücü ile ölçülmektedir. Öğretmenlerin rehberliğinde öğrencilerin bilgi ve teknolojiye ulaştırılması, yetiştirilmesi ve yüksek öğretime hazırlanması endüstriyel teknik okullarında yapılmaktadır. Metal Teknolojisi alanı, sanayinin istediği gibi mesleğinde yeniliklere açık ve nitelikli insan yetiştirmeyi amaçlamaktadır. Metal Teknolojisi alanı; metalleri sıcak veya soğuk olarak biçimlendirme, kaynak işleri, ısıl işlemler, malzeme muayene yöntemleri, mesleği ile ilgili NC, CNC tezgâhlarında çalışma konularının verildiği meslek alanıdır.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 6: Elektrik-Elektronik -->
+        <div class="slide department-slide">
+            <div class="tech-card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+                <h1 class="department-title" style="margin-bottom: 30px; text-align: center; width: 100%;">⚡ Elektrik-Elektronik Teknolojisi</h1>
+                <div class="department-layout">
+                    <img src="elektrik_resim_1.jpg" alt="Elektrik-Elektronik Teknolojisi" class="department-image">
+                    <div class="department-content">
+                        <div class="department-description" style="--delay: 0s">
+                            <strong>🎓 Eğitim:</strong> Elektrik tesisatları, PLC, devreler
+                        </div>
+                        <div class="department-features" style="--delay: 0.2s">
+                            <strong>💼 Kariyer:</strong> Elektrik teknisyeni, otomasyon uzmanı
+                        </div>
+                        <div class="department-features" style="--delay: 0.4s">
+                            <strong>🏭 Sektör:</strong> Enerji, fabrika bakım, OSB'ler
+                        </div>
+                        <div class="department-features" style="--delay: 0.6s">
+                            <strong>📋 Alan Hakkında:</strong> Bilgisayar destekli uygulamalar kullanarak tasarım yapar, Endüstriyel kontrol ve arıza analizi yapar, Elektrik makineleri ve kontrol sistemlerini kurar(otomasyon), bakım onarımını yapar ve arızasını tespit ederek giderir, Endüstriyel elektrik sistemlerini kurar, bakım onarımını yapar ve arızasını tespit ederek giderir.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 7: Bilişim Teknolojileri -->
+        <div class="slide department-slide">
+            <div class="tech-card" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
+                <h1 class="department-title" style="margin-bottom: 30px; text-align: center; width: 100%;">💻 Bilişim Teknolojileri Alanı</h1>
+                <div class="department-layout">
+                    <img src="bilişim.jpg" alt="Bilişim Teknolojileri" class="department-image">
+                    <div class="department-content">
+                        <div class="department-description" style="--delay: 0s">
+                            <strong>🎓 Eğitim:</strong> Yazılım, ağ sistemleri, donanım, veri tabanı
+                        </div>
+                        <div class="department-features" style="--delay: 0.2s">
+                            <strong>💼 Kariyer:</strong> Yazılımcı, IT uzmanı, sistem yöneticisi
+                        </div>
+                        <div class="department-features" style="--delay: 0.4s">
+                            <strong>🏭 Sektör:</strong> Finans, e-ticaret, teknoloji firmaları
+                        </div>
+                        <div class="department-features" style="--delay: 0.6s">
+                            <strong>📋 Alan Hakkında:</strong> Bilişim Sistemleri ve Teknolojileri mezunları, teknoloji sektöründe, finans sektöründe, sağlık sektöründe ve diğer birçok sektörde çalışabilirler. Mezunlar, yazılım geliştirme, veritabanı yönetimi, ağ yönetimi, web tasarımı, veri analizi ve raporlama gibi konularda uzmanlaşabilirler.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 8: Mobilya ve İç Mekân -->
+        <div class="slide department-slide">
+            <div class="tech-card" style="background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);">
+                <h1 class="department-title" style="margin-bottom: 30px; text-align: center; width: 100%;">🪑 Mobilya ve İç Mekân Tasarımı</h1>
+                <div class="department-layout">
+                    <img src="mobilya.jpg" alt="Mobilya ve İç Mekân Tasarımı" class="department-image">
+                    <div class="department-content">
+                        <div class="department-description" style="--delay: 0s">
+                            <strong>🎓 Eğitim:</strong> Mobilya imalatı, çizim, CNC uygulamaları
+                        </div>
+                        <div class="department-features" style="--delay: 0.2s">
+                            <strong>💼 Kariyer:</strong> Dekoratör, mobilya ustası
+                        </div>
+                        <div class="department-features" style="--delay: 0.4s">
+                            <strong>🏭 Sektör:</strong> Mobilya üretim, iç mimarlık ofisleri
+                        </div>
+                        <div class="department-features" style="--delay: 0.6s">
+                            <strong>📋 Alan Hakkında:</strong> İşlevsel özellikleri ile mekanları kullanışlı hale getiren, estetik değeriyle de yaşadığımız ya da çalıştığımız mekanların sıcak, sevimli ve renkli ortamlar haline gelmesini sağlayan bir alandır
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 9: İnşaat Teknolojisi -->
+        <div class="slide department-slide">
+            <div class="tech-card" style="background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);">
+                <h1 class="department-title" style="margin-bottom: 30px; text-align: center; width: 100%;">🏗️ İnşaat Teknolojisi Alanı</h1>
+                <div class="department-layout">
+                    <img src="inşaat.jpg" alt="İnşaat Teknolojisi" class="department-image">
+                    <div class="department-content">
+                        <div class="department-description" style="--delay: 0s">
+                            <strong>🎓 Eğitim:</strong> Proje çizimi, kalıp, betonarme, şantiye uygulamaları
+                        </div>
+                        <div class="department-features" style="--delay: 0.2s">
+                            <strong>💼 Kariyer:</strong> Şantiye teknikeri, ölçüm uzmanı
+                        </div>
+                        <div class="department-features" style="--delay: 0.4s">
+                            <strong>🏭 Sektör:</strong> Yapı denetim, kamu altyapı projeleri
+                        </div>
+                        <div class="department-features" style="--delay: 0.6s">
+                            <strong>📋 Alan Hakkında:</strong> İnşaat Teknolojisi alanı altında yer alan mesleklerde, sektörün ihtiyaçları, bilimsel ve teknolojik gelişmeler doğrultusunda gerekli olan mesleki yeterlikleri kazanmış nitelikli meslek elemanları yetiştirmek amaçlanmaktadır
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 10: Son Söz -->
+        <div class="slide">
+            <h1>BİST Sakarya MTAL: Geleceğe Yön Veren Mesleki Eğitim</h1>
+            <div class="two-column">
+                <div>
+                    <div class="final-message">
+                        Yaklaşık 1500 öğrencisi ve 150'nin üzerinde personeliyle, BİST Sakarya MTAL, geleceğe yön veren mesleki eğitim anlayışıyla hizmet vermeye devam etmektedir.
+                    </div>
+                    <div class="logo" style="width: 100px; height: 100px; margin: 20px auto;"></div>
+                </div>
+                <div>
+                    <div class="contact-info" style="--delay: 0s">
+                        <h3>📍 İletişim Bilgileri</h3>
+                        <p><strong>Adres:</strong> Çukurahmediye Mh. Sakarya Cd. Meydan Sokak No:3 Adapazarı</p>
+                    </div>
+                    <div class="contact-info" style="--delay: 0.2s">
+                        <p><strong>📧 E-Posta:</strong> 194089@meb.k12.tr</p>
+                    </div>
+                    <div class="contact-info" style="--delay: 0.4s">
+                        <p><strong>🌐 Web:</strong> sakaryaeml.meb.k12.tr</p>
+                    </div>
+                    <div class="contact-info" style="--delay: 0.6s">
+                        <p><strong>📞 Telefon:</strong> 0264 274 58 10</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 11: Müdür Yardımcısı İletişim -->
+        <div class="slide">
+            <div class="tech-card" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);">
+                <div class="tech-content">
+                    <h1 style="color: white; margin-bottom: 30px; font-size: 2.2em;">9. Sınıflardan Sorumlu Müdür Yardımcısı</h1>
+                    <h2 style="color: white; margin-bottom: 40px; font-size: 2.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Yusuf Yıldırım</h2>
+                    
+                    <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+                        <div class="contact-item" style="--delay: 0s">
+                            <div class="contact-icon">📞</div>
+                            <h3 style="color: white; margin: 10px 0;">Telefon</h3>
+                            <p style="color: white; font-size: 1.2em; font-weight: bold;">0552 158 25 50</p>
+                        </div>
+                        <div class="contact-item" style="--delay: 0.2s">
+                            <div class="contact-icon">💬</div>
+                            <h3 style="color: white; margin: 10px 0;">WhatsApp</h3>
+                            <p style="color: white; font-size: 1.2em; font-weight: bold;">0552 158 25 50</p>
+                        </div>
+                        <div class="contact-item" style="--delay: 0.4s">
+                            <div class="contact-icon">📧</div>
+                            <h3 style="color: white; margin: 10px 0;">E-Posta</h3>
+                            <p style="color: white; font-size: 1.1em; font-weight: bold;">yfryildirim@gmail.com</p>
+                        </div>
+                        <div class="contact-item" style="--delay: 0.6s">
+                            <div class="contact-icon">⏰</div>
+                            <h3 style="color: white; margin: 10px 0;">Mesai Saatleri</h3>
+                            <p style="color: white; font-size: 1.1em;">Hafta İçi<br>08:30 - 17:30</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-message" style="--delay: 0.8s; margin-top: 40px; padding: 25px; background: rgba(255,255,255,0.1); border-radius: 15px; border-left: 5px solid #f39c12;">
+                        <p style="color: white; font-size: 1.1em; line-height: 1.6; text-align: center;">
+                            <strong>💡 İletişim Bilgisi:</strong><br>
+                            Mesai saatleri içerisinde telefon ile arayarak veya WhatsApp üzerinden mesaj atarak bana ulaşabilirsiniz. 
+                            Eğer anında cevap alamazsanız, en kısa sürede size dönüş yapacağım.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()" id="prevBtn">← Önceki</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn">Sonraki →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = index + 1;
+            
+            // Navigasyon butonlarını güncelle
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        // Klavye kontrolleri
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Touch gesture desteği (mobil için)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Sola swipe - sonraki sayfa
+                    nextSlide();
+                } else {
+                    // Sağa swipe - önceki sayfa
+                    previousSlide();
+                }
+            }
+        }
+
+        // İlk yükleme
+        showSlide(0);
+    </script>
+</body>
+</html> 
