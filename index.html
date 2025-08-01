@@ -47,69 +47,85 @@
                 height: 98vh;
                 padding: 10px;
                 border-radius: 10px;
+                overflow-y: auto;
             }
             
             .slide h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
                 margin-bottom: 15px;
             }
             
             .slide h2 {
-                font-size: 1.5em;
+                font-size: 1.3em;
                 margin-bottom: 10px;
             }
             
             .slide h3 {
-                font-size: 1.2em;
+                font-size: 1.1em;
                 margin-bottom: 8px;
             }
             
+            /* Tüm grid düzenlerini tek sütuna çevir */
             .two-column {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                height: auto;
-            }
-            
-            .department-layout {
-                grid-template-columns: 1fr;
+                display: flex !important;
+                flex-direction: column !important;
+                grid-template-columns: none !important;
                 gap: 15px;
                 height: auto;
             }
             
+            .department-layout {
+                display: flex !important;
+                flex-direction: column !important;
+                grid-template-columns: none !important;
+                gap: 15px;
+                height: auto;
+            }
+            
+            .contact-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                grid-template-columns: none !important;
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            /* Resim boyutlarını ayarla */
             .department-image {
-                height: 200px;
+                height: 180px;
+                width: 100%;
                 object-fit: cover;
+                border-radius: 10px;
             }
             
             .department-content {
                 padding: 10px;
+                width: 100%;
             }
             
             .department-title {
-                font-size: 1.4em;
+                font-size: 1.3em;
                 margin-bottom: 10px;
+                text-align: center;
             }
             
             .department-description {
-                font-size: 0.95em;
-                padding: 10px;
-                margin: 4px 0;
-            }
-            
-            .department-features {
                 font-size: 0.9em;
                 padding: 10px;
                 margin: 4px 0;
             }
             
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                margin-top: 20px;
+            .department-features {
+                font-size: 0.85em;
+                padding: 10px;
+                margin: 4px 0;
             }
             
+            /* Contact item'ları düzenle */
             .contact-item {
                 padding: 15px;
+                width: 100%;
+                margin-bottom: 10px;
             }
             
             .contact-icon {
@@ -122,83 +138,100 @@
             }
             
             .contact-message p {
-                font-size: 1em;
+                font-size: 0.9em;
             }
             
+            /* Info box'ları düzenle */
             .info-box, .stats-box {
-                padding: 15px;
+                padding: 12px;
                 margin-bottom: 10px;
+                width: 100%;
             }
             
             .info-box p, .stats-box p {
-                font-size: 0.9em;
-                margin-bottom: 8px;
+                font-size: 0.85em;
+                margin-bottom: 6px;
             }
             
             .feature-item {
-                padding: 12px;
-                margin: 8px 0;
-                font-size: 0.9em;
+                padding: 10px;
+                margin: 6px 0;
+                font-size: 0.85em;
             }
             
+            /* Tech card'ları düzenle */
             .tech-card {
-                padding: 20px;
-                height: calc(100% - 40px);
+                padding: 15px;
+                height: auto;
+                min-height: calc(100% - 30px);
             }
             
             .tech-icon {
-                font-size: 3em;
+                font-size: 2.5em;
                 margin-bottom: 15px;
             }
             
             .final-message {
-                font-size: 1em;
+                font-size: 0.9em;
                 margin-bottom: 20px;
             }
             
             .contact-info {
-                padding: 15px;
-                margin: 8px 0;
+                padding: 12px;
+                margin: 6px 0;
             }
             
             .contact-info p {
-                font-size: 0.9em;
+                font-size: 0.85em;
             }
             
             .historical-item, .mesem-info {
-                padding: 12px;
-                margin: 8px 0;
-                font-size: 0.9em;
+                padding: 10px;
+                margin: 6px 0;
+                font-size: 0.85em;
             }
             
+            /* Navigasyon düzenlemeleri */
             .navigation {
-                bottom: 15px;
-                gap: 10px;
+                bottom: 10px;
+                gap: 8px;
             }
             
             .nav-btn {
-                padding: 12px 20px;
-                font-size: 14px;
-                min-width: 100px;
-                border-radius: 25px;
+                padding: 10px 18px;
+                font-size: 13px;
+                min-width: 90px;
+                border-radius: 20px;
             }
             
             .slide-counter {
-                top: 15px;
-                right: 20px;
-                padding: 6px 12px;
-                font-size: 12px;
+                top: 10px;
+                right: 15px;
+                padding: 5px 10px;
+                font-size: 11px;
             }
             
+            /* Logo düzenlemeleri */
             .logo {
-                width: 100px;
-                height: 100px;
-                margin: 0 auto 15px;
+                width: 80px;
+                height: 80px;
+                margin: 0 auto 10px;
             }
             
             .subtitle {
-                font-size: 1.1em;
-                margin-bottom: 20px;
+                font-size: 1em;
+                margin-bottom: 15px;
+            }
+            
+            /* Metal alanı için özel düzenlemeler */
+            .metal-department .department-features {
+                font-size: 0.8em;
+                line-height: 1.2;
+            }
+            
+            .metal-department .department-description {
+                font-size: 0.85em;
+                line-height: 1.3;
             }
         }
 
